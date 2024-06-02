@@ -1,15 +1,15 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu May 23 15:20:21 2024
-@author: prachet
-"""
-
 import numpy as np
 import pickle
 import streamlit as st
 
 # Loading the saved model
-loaded_model = pickle.load(open('car_price_prediction_model.sav', 'rb'))
+model_file = 'car_price_prediction_model.sav'
+
+try:
+    loaded_model = pickle.load(open(model_file, 'rb'))
+except FileNotFoundError:
+    st.error(f"The model file {model_file} was not found. Please check the file path and try again.")
+    st.stop()
 
 # Creating a function for prediction
 def car_price_prediction(input_data):
